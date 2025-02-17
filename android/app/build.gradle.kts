@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.kanaekiii.rhythmix"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 34
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -24,8 +24,8 @@ android {
         applicationId = "com.kanaekiii.rhythmix"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdkVersion(23)
+        targetSdkVersion(33)
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
@@ -41,4 +41,9 @@ android {
 
 flutter {
     source = "../.."
+}
+
+tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Xlint:-options")
+    options.compilerArgs.add("-Xlint:deprecation")
 }

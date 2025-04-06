@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                     'Set your rhythm',
                         () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const MetronomePage()),
+                      MaterialPageRoute(builder: (context) => MetronomePage()),
                     ),
                   ),
 
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                     context,
                     'Pitch Detection',
                     'Tune your notes',
-                        () {},
+                        () {}
                   ),
 
                   // Sessions & Notes in a row
@@ -129,6 +129,7 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Sessions'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+
         ],
       ),
     );

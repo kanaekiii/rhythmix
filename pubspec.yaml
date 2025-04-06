@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  just_audio: ^0.9.46
+  audioplayers: ^6.4.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -59,7 +59,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - lib/assets/tick.wav
+    - assets/tick.wav
 
   # To add assets to your application, add an assets section, like this:
   # assets:

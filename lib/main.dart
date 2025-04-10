@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'session_data.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Required before using async features
+  await SessionData.loadSessions(); // Load saved sessions from local storage
   runApp(const RhythmixApp());
 }
 

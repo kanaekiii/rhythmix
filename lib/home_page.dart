@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'metronome_page.dart';
+import 'sessions_page.dart';
+import 'audio_recorder_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -84,7 +87,12 @@ class HomePage extends StatelessWidget {
                           context,
                           'Sessions',
                           'Track your progress',
-                              () {},
+                              () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const SessionsPage()),
+                                );
+                              },
                           small: true,
                         ),
                       ),
@@ -106,9 +114,42 @@ class HomePage extends StatelessWidget {
 
             // Start a new session button
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async{
                 // Example navigation or logic
                 // Navigator.push(context, MaterialPageRoute(builder: (context) => SessionPage()));
+                final sessionNameController = TextEditingController();
+
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('Name your session'),
+                    content: TextField(
+                      controller: sessionNameController,
+                      decoration: InputDecoration(hintText: 'Session Name'),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          final name = sessionNameController.text.trim();
+                          if (name.isNotEmpty) {
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AudioRecorderPage(sessionName: name),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text('Continue'),
+                      ),
+                    ],
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,

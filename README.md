@@ -28,7 +28,9 @@ Rhythmix is an Android application that captures live audio and identifies Carna
 3. View detected swaras and pitch graph in real time.
 
 ## Contributors
-- **Abinaya Raghuraman**
+- **[Abinaya Raghuraman](https://github.com/kanaekiii)**
+- **[Rajeev Sekar](https://github.com/rajeevsekar)**
+- **[Milind Vamsi](https://github.com/milindvamsim)**
 
 ## License
 This project is licensed under the MIT License.

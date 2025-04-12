@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rhythmix_v1/notes_page.dart';
 import 'metronome_page.dart';
 import 'sessions_page.dart';
 import 'audio_recorder_page.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,7 +38,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // App bar with logo/name
       appBar: AppBar(
         title: Row(
           children: const [
@@ -50,8 +49,6 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-
-      // Body with feature cards and 'Start a new session' button
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -60,7 +57,6 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  // Metronome card
                   _buildFeatureCard(
                     context,
                     'Metronome',
@@ -70,16 +66,12 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => MetronomePage()),
                     ),
                   ),
-
-                  // Pitch Detection card
                   _buildFeatureCard(
                     context,
                     'Pitch Detection',
                     'Tune your notes',
-                        () {}
+                        () {},
                   ),
-
-                  // Sessions & Notes in a row
                   Row(
                     children: [
                       Expanded(
@@ -87,12 +79,10 @@ class HomePage extends StatelessWidget {
                           context,
                           'Sessions',
                           'Track your progress',
-                              () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const SessionsPage()),
-                                );
-                              },
+                              () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SessionsPage()),
+                          ),
                           small: true,
                         ),
                       ),
@@ -102,7 +92,10 @@ class HomePage extends StatelessWidget {
                           context,
                           'Notes',
                           'Record your ideas',
-                              () {},
+                              () => Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const NotesPage()),
+                              ),
                           small: true,
                         ),
                       ),
@@ -111,26 +104,21 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Start a new session button
             ElevatedButton(
-              onPressed: () async{
-                // Example navigation or logic
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => SessionPage()));
+              onPressed: () async {
                 final sessionNameController = TextEditingController();
-
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: Text('Name your session'),
+                    title: const Text('Name your session'),
                     content: TextField(
                       controller: sessionNameController,
-                      decoration: InputDecoration(hintText: 'Session Name'),
+                      decoration: const InputDecoration(hintText: 'Session Name'),
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('Cancel'),
+                        child: const Text('Cancel'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -145,7 +133,7 @@ class HomePage extends StatelessWidget {
                             );
                           }
                         },
-                        child: Text('Continue'),
+                        child: const Text('Continue'),
                       ),
                     ],
                   ),
@@ -159,19 +147,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-
-      // Bottom nav bar
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blue,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.timer), label: 'Sessions'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-
-        ],
       ),
     );
   }

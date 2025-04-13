@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -11,6 +14,28 @@ class _NotesPageState extends State<NotesPage> {
   final List<String> _notes = [];
   final TextEditingController _noteController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _loadNotes();
+  }
+
+  Future<void> _loadNotes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final notesData = prefs.getString('notes');
+    if (notesData != null) {
+      setState(() {
+        _notes.addAll(List<String>.from(json.decode(notesData)));
+      });
+    }
+  }
+
+  Future<void> _saveNotes() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('notes', json.encode(_notes));
+  }
+
+
   void _addNote() {
     final text = _noteController.text.trim();
     if (text.isNotEmpty) {
@@ -18,6 +43,7 @@ class _NotesPageState extends State<NotesPage> {
         _notes.add(text);
         _noteController.clear();
       });
+      _saveNotes();
     }
   }
 
@@ -44,6 +70,7 @@ class _NotesPageState extends State<NotesPage> {
                 setState(() {
                   _notes[index] = updatedText;
                 });
+                _saveNotes();
               }
               Navigator.pop(context);
             },
@@ -67,6 +94,7 @@ class _NotesPageState extends State<NotesPage> {
               setState(() {
                 _notes.removeAt(index);
               });
+              _saveNotes();
               Navigator.pop(context);
             },
             child: const Text("Delete", style: TextStyle(color: Colors.red)),

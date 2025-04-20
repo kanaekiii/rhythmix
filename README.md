@@ -1,39 +1,90 @@
-# Rhythmix 🎶
+# Rhythmix
 ### Real-time Carnatic Music Note Identification
 
 Rhythmix is an Android application that captures live audio and identifies Carnatic swaras (notes) in real-time. It provides pitch tracking and visualization, helping musicians and learners analyze their performance.
 
+---
+
 ## Features
+
 - 🎵 **Real-time Swara Detection** – Identifies Carnatic notes from live audio input.
-- 📈 **Pitch Visualization** – Displays pitch variations graphically.
 - 🎙️ **Microphone Input** – Works with live singing or instrument sounds.
-- 📊 **Analysis & Feedback** – Helps users understand their pitch accuracy.
-
-## Tech Stack
-- **Programming Language**: Flutter (Android)
-- **Machine Learning**: TensorFlow Lite
-- **UI/UX Design**: Figma
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/kanaekiii/rhythmix.git
-   ```
-2. Open in **Android Studio** and build the project.
-3. Run the app on an emulator or a real device.
-
-## Usage
-1. Open the app and grant microphone permissions.
-2. Start singing or playing a Carnatic instrument.
-3. View detected swaras and pitch graph in real time.
-
-## Contributors
-- **[Abinaya Raghuraman](https://github.com/kanaekiii)**
-- **[Rajeev Sekar](https://github.com/rajeevsekar)**
-- **[Milind Vamsi](https://github.com/milindvamsim)**
-
-## License
-This project is licensed under the MIT License.
+- 📊 **Session Tracking** – Record and view your practice sessions.
+- 📝 **Notes** – Take musical notes and reminders in-app.
 
 ---
-Made with ❤️ for Carnatic music lovers! 🎼
+
+## Installation
+
+Install Rhythmix with:
+
+```bash
+git clone https://github.com/kanaekiii/rhythmix.git
+```
+
+- Open the project in **Android Studio**
+- Run the app on an emulator or a real device.
+
+---
+
+## Usage
+
+- Open the app and grant microphone permissions.
+- Start singing or playing a Carnatic instrument.
+- View detected swaras and pitch graphs in real time.
+
+---
+
+## Screenshots
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>🏠 Home</strong><br>
+      <img src="https://github.com/kanaekiii/rhythmix/blob/main/screenshots/Home.png" width="250"/>
+    </td>
+    <td align="center">
+      <strong>🕒 Metronome</strong><br>
+      <img src="https://github.com/kanaekiii/rhythmix/blob/main/screenshots/Metronome.png" width="250"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>📈 Pitch Detection</strong><br>
+      <img src="https://github.com/kanaekiii/rhythmix/blob/main/screenshots/Pitch%20Detection.png" width="250"/>
+    </td>
+    <td align="center">
+      <strong>🎙️ Sessions</strong><br>
+      <img src="https://github.com/kanaekiii/rhythmix/blob/main/screenshots/Sessions.png" width="250"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <strong>📝 Notes</strong><br>
+      <img src="https://github.com/kanaekiii/rhythmix/blob/main/screenshots/Notes.png" width="250"/>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+
+---
+
+## Authors
+
+- [Abinaya Raghuraman](https://github.com/kanaekiii)
+- [Rajeev Sekar](https://github.com/rajeevsekar)
+- [Milind Vamsi](https://github.com/milindvamsim)
+
+---
+
+## License
+
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
+---
+
+![Rhythmix Logo](https://github.com/kanaekiii/rhythmix/blob/main/assets/Logo_noname.png)

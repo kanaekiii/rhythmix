@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Carnatic Pitch Detection</title>
+  <script>
+    const C2 = 65.41;
+    const carnaticNotes = ["Sa", "Ri1", "Ri2", "Ga1", "Ga2", "Ma1", "Ma2", "Pa", "Dha1", "Dha2", "Ni1", "Ni2"];
+    let test_frequencies = [];
+
+    for (let i = 0; i < 30; i++) {
+      const freq = C2 * Math.pow(2, i / 12);
+      const name = carnaticNotes[i % 12];
+      const note = { frequency: freq, name };
+      const sharp = { frequency: freq * Math.pow(2, 1 / 48), name: name + "♯" };
+      const flat = { frequency: freq * Math.pow(2, -1 / 48), name: name + "♭" };
+      test_frequencies.push(flat, note, sharp);
+    }
+
+    let correlation_worker;
+
+    window.onload = function () {
+      correlation_worker = new Worker("correlation_worker.js");
+      correlation_worker.onmessage = interpretCorrelationResult;
+
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(useStream)
+        .catch(err => console.error('Mic access error:', err));
+    };
+
+    function useStream(stream) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const mic = audioContext.createMediaStreamSource(stream);
+      const processor = audioContext.createScriptProcessor(1024, 1, 1);
+
+      mic.connect(processor);
+      processor.connect(audioContext.destination);
+
+      let buffer = [];
+      let recording = true;
+
+      processor.onaudioprocess = (event) => {
+        if (!recording) return;
+        const input = event.inputBuffer.getChannelData(0);
+        buffer.push(...input);
+
+        if (buffer.length > audioContext.sampleRate * 0.1) {
+          recording = false;
+
+          correlation_worker.postMessage({
+            timeseries: buffer,
+            test_frequencies,
+            sample_rate: audioContext.sampleRate
+          });
+
+          buffer = [];
+          setTimeout(() => recording = true, 250);
+        }
+      };
+    }
+
+    function interpretCorrelationResult(event) {
+      const magnitudes = event.data.frequency_amplitudes.map(
+        z => z[0] ** 2 + z[1] ** 2
+      );
+
+      let maxIndex = -1, maxMag = 0;
+      magnitudes.forEach((m, i) => {
+        if (m > maxMag) {
+          maxMag = m;
+          maxIndex = i;
+        }
+      });
+
+      const avgMag = magnitudes.reduce((a, b) => a + b, 0) / magnitudes.length;
+      const confidence = maxMag / avgMag;
+
+      if (confidence > 10) {
+        const bestMatch = test_frequencies[maxIndex];
+        document.getElementById("note-name").innerText = bestMatch.name;
+        document.getElementById("frequency").innerText = bestMatch.frequency.toFixed(2) + " Hz";
+
+        if (window.PitchChannel && window.PitchChannel.postMessage) {
+          PitchChannel.postMessage(`${bestMatch.name},${bestMatch.frequency}`);
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 2em;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 4em;
+      color: #4A90E2;
+      margin: 0;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 0.5em;
+    }
+
+    #note-name {
+      color: #4A90E2;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #frequency {
+      font-weight: bold;
+      color: #9b9b9b;
+    }
+
+    .note-info {
+      font-size: 1.3em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <p><b>Detected Note:</b></p>
+  <h1 id="note-name">-</h1>
+  <p class="note-info">
+    <span>Frequency:</span>
+    <span id="frequency">- Hz</span>
+  </p>
+</body>
+
+</html>

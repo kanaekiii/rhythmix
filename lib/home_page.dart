@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rhythmix_v1/notes_page.dart';
+import 'package:rhythmix_v1/pitch_detection_page.dart';
 import 'metronome_page.dart';
 import 'sessions_page.dart';
 import 'audio_recorder_page.dart';
@@ -70,8 +71,14 @@ class HomePage extends StatelessWidget {
                     context,
                     'Pitch Detection',
                     'Tune your notes',
-                        () {},
+                        () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const TunerPage()),
+                      );
+                    },
                   ),
+
                   Row(
                     children: [
                       Expanded(

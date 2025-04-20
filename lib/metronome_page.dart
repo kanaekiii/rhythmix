@@ -1,9 +1,14 @@
+// ignore_for_file: deprecated_member_use, duplicate_ignore, sort_child_properties_last
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class MetronomePage extends StatefulWidget {
+  const MetronomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MetronomePageState createState() => _MetronomePageState();
 }
 
@@ -123,6 +128,7 @@ class _MetronomePageState extends State<MetronomePage>
                       color: Colors.lightBlueAccent,
                       boxShadow: [
                         BoxShadow(
+                          // ignore: deprecated_member_use
                           color: Colors.blueAccent.withOpacity(0.6),
                           blurRadius: 40,
                           spreadRadius: 10,

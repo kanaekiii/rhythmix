@@ -119,6 +119,7 @@ class _NotesPageState extends State<NotesPage> {
                         decoration: InputDecoration(
                           hintText: 'Write something...',
                           filled: true,
+                          // ignore: deprecated_member_use
                           fillColor: Colors.white.withOpacity(0.9),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                         ),

@@ -78,6 +78,8 @@ git clone https://github.com/kanaekiii/rhythmix.git
 - [Abinaya Raghuraman](https://github.com/kanaekiii)
 - [Rajeev Sekar](https://github.com/rajeevsekar)
 - [Milind Vamsi](https://github.com/milindvamsim)
+- [Akilesh S](https://github.com/ItsAkilesh)
+- [Muhammad Kifayathullah](https://github.com/muhd-kifayath)
 
 ---
 
